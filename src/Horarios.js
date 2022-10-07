@@ -11,6 +11,7 @@ export default function Horarios(props){
     const [filme, setFilme] = useState({})
     const [dias, setDias] = useState([])
     const [error, setError] = useState(false)
+    const [horarioSessoes, setSessoes] = useState([])
 
     const { filmeId } = useParams();
 
@@ -19,10 +20,10 @@ export default function Horarios(props){
 		const promise = axios.get(URL)
 	
 		promise.then((res) => {
-		  console.log(res.data.days)
           setDias(res.data.days)
-		  setFilme(res.data) // se o array de imagens chega, guardo no estado
-		})
+		  setFilme(res.data) 
+          
+        })
 	
 		promise.catch((err) => {
 		  console.log(err.response.data)
@@ -34,7 +35,7 @@ export default function Horarios(props){
     return(
         <>
         <HorariosFilmes>
-           {dias.map((d,index) =>  <Horario dias={d} filme={props.filme}>
+           {dias.map((d,index) =>  <Horario setSessoes={setSessoes} sessoes={horarioSessoes} dias={d} filme={props.filme}>
                 </Horario>)}
         </HorariosFilmes>
         </>
@@ -47,5 +48,5 @@ display:grid;
 justify-content:center;
 align-items:center;
 width:100%;
-
+margin-bottom:100px;
 `

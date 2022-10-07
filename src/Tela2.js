@@ -73,7 +73,6 @@ background: #DFE6ED;
 border: 1px solid #9EADBA;
 bottom: 0;
 left:0;
-z-index:1;
 position:fixed;
 
 p{

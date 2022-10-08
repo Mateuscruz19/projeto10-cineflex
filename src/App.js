@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Lista from './Lista';
 import Tela1 from './Tela1';
 import Tela2 from './Tela2';
+import Tela3 from './Tela3';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 export default function App(){
     
     const [Idfilme, setIdfilme] = useState(0)
+    const [Reserva, setReserva] = useState({})
 
 
     return(
@@ -20,6 +22,7 @@ export default function App(){
             <Routes>
             <Route path='/' element={<Tela1 idfilme={Idfilme} setIdfilme={setIdfilme} />}/>
             <Route path="/tela2/:filmeId" element={<Tela2 idfilme={Idfilme} setIdfilme={setIdfilme} />}/>
+            <Route path="/tela3/:sessaoId" element={<Tela3 setReserva={setReserva}/>} />
             </Routes>
         </ScreenConteiner>
         </BrowserRouter>

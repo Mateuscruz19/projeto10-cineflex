@@ -4,14 +4,16 @@ import Header from './Header';
 import styled from 'styled-components';
 import Lista from './Lista';
 
-export default function Tela1(){
+export default function Tela1(props){
+
+    
 
     
     return(
         <>
         <Header/>
         <Titulo>Selecione o filme</Titulo>
-        <Lista/>
+        <Lista idfilme={props.idfilme}/>
         </>
     )
 }

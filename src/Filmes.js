@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // https://mock-api.driven.com.br/api/v5/cineflex/movies
 // posterURL
@@ -9,6 +11,9 @@ export default function Filmes() {
 
 	const [items, setItems] = useState(undefined)
 	const [error, setError] = useState(false) 
+
+	const { sessaoid } = useParams();
+	
 
 	useEffect(() => {
 		const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies"
@@ -33,7 +38,11 @@ export default function Filmes() {
 	  }
 	return (
 		<>
-		{items.map(t =><Filme><img alt='teste' src={t.posterURL}/></Filme>)}
+		{items.map(t => 
+			<Link to={`/tela2/${t.id}`}>
+			<Filme><img alt='teste' src={t.posterURL}/></Filme>
+			</Link>
+			)}
 		</>	
 	);
 }

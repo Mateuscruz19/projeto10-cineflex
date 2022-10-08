@@ -7,14 +7,15 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Horarios from './Horarios';
 
-export default function Tela2(){
+export default function Tela2(props){
 
     const [titulo, setTitulo] = useState()
     const [imagem, setImagem] = useState()
     const [filme, setFilme] = useState(undefined)
 
     const { filmeId } = useParams();
-    
+
+
     useEffect(() => {
 
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${filmeId}/showtimes`)

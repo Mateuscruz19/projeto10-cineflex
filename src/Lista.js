@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import Filmes from './Filmes';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+export default function Lista(props){
 
-export default function Lista(){
+    
+
     return(
         <>
-        <Listafilmes><Filmes/></Listafilmes>
+        <Listafilmes>    
+                <Filmes idfilme={props.idfilme}/>
+        </Listafilmes>
         </>
 
     )

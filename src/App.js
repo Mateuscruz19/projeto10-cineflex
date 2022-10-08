@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useState } from 'react';
+import { useState } from 'react';
 import Header from './Header';
 import styled from 'styled-components';
 import Lista from './Lista';
@@ -11,12 +11,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default function App(){
     
+    const [Idfilme, setIdfilme] = useState(0)
+
+
     return(
         <BrowserRouter>
         <ScreenConteiner>
             <Routes>
-            <Route path='/' element={<Tela1/>}/>
-            <Route path="/tela2/:filmeId" element={<Tela2/>}/>
+            <Route path='/' element={<Tela1 idfilme={Idfilme} setIdfilme={setIdfilme} />}/>
+            <Route path="/tela2/:filmeId" element={<Tela2 idfilme={Idfilme} setIdfilme={setIdfilme} />}/>
             </Routes>
         </ScreenConteiner>
         </BrowserRouter>

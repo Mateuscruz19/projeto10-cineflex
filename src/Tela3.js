@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Horarios from './Horarios';
 import Cadeira from './Cadeira';
+import filmeteste from './filmeteste';
 
 export default function Tela3(props){
 
@@ -19,7 +20,7 @@ export default function Tela3(props){
         <Header></Header>
         <Titulo>Selecione o(s) assento(s)</Titulo>
         <AssentosLista>
-            <Cadeira reservados={AssentosReservados} setReservados={setReservado}   setReserva={props.setReserva}></Cadeira>
+         {filmeteste.seats.map((p) => <Cadeira cadeiras={p} reservados={AssentosReservados} setReservados={setReservado} setReserva={props.setReserva}/>)}   
         </AssentosLista>
         <Legenda>
             <Selecionado/>

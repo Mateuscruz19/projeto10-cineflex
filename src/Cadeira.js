@@ -12,7 +12,7 @@ export default function Cadeira(props){
 
     function AdcionarAssento(){
         console.log("Voceclicou")
-        props.setReservados([...props.reservados])
+        props.setReservados([...props.reservados,props.cadeiras.id])
         console.log(props.reservados)
         setClicou(true)
     }
@@ -23,7 +23,7 @@ export default function Cadeira(props){
 
     return(
     <>
-    {filmeteste.seats.map((p) => <Assento  cor={p.isAvailable ? "#C3CFD9" : "#FBE192"} ocupado={p.isAvailable} onClick={p.isAvailable ? AdcionarAssento : AssentoOcupado}>{p.id}</Assento>)}
+    <Assento cor={Clicou ? "#1AAE9E" : props.cadeiras.isAvailable ? "#C3CFD9" : "#FBE192"} ocupado={props.cadeiras.isAvailable} onClick={props.cadeiras.isAvailable ? AdcionarAssento : AssentoOcupado}>{props.cadeiras.id}</Assento>
     </>
     )
 }

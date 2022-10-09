@@ -6,6 +6,7 @@ import Lista from './Lista';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Botao from './botaosessao';
+import { Link } from 'react-router-dom';
 
 export default function Horario(props){
 
@@ -14,7 +15,7 @@ export default function Horario(props){
        <Sessoes>
             <p>{props.dias.weekday} - {props.dias.date}</p>
             <ul>
-                {props.dias.showtimes.map( (s) => <Botao horario={s.name}></Botao>)}
+                {props.dias.showtimes.map( (s) => <Link to={`/tela3/${s.id}`}><Botao horario={s.name}></Botao></Link>)}
                
             </ul>
         </Sessoes>

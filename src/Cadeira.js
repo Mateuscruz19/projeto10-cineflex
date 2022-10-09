@@ -14,7 +14,11 @@ export default function Cadeira(props){
         console.log("Voceclicou")
         props.setReservados([...props.reservados,props.cadeiras.id])
         console.log(props.reservados)
-        setClicou(true)
+        if(Clicou === false){
+            setClicou(true)
+        }else if(Clicou === true){
+            setClicou(false)
+        }
     }
 
     function AssentoOcupado(){

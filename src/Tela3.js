@@ -11,16 +11,56 @@ import filmeteste from './filmeteste';
 
 export default function Tela3(props){
 
+    const [Cadeiraserver, setServer] = useState([])
+    const [Assento, setAssento] = useState([])
+    const [titulo, setTitulo] = useState("")
+    const [imagem, setImagem] = useState("")
+    const [Dia, setDia] = useState("")
+    const [Hora, setHora] = useState("")
+
     const [AssentosReservados, setReservado] = useState([])
+    const [Nome, setNome] = useState("");
+    const [CPF, setCPF] = useState("");
+    const [error, setError] = useState(false) 
 
+    const { sessaoId } = useParams();
+   
+    
+  useEffect(() => {
 
+    const URL =  `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessaoId}/seats`
+    const promise = axios.get(URL)
+
+    promise.then((res) => {
+        setServer(res.data)
+        setTitulo(res.data.movie.title)
+        setImagem(res.data.movie.posterURL)
+        setDia(res.data.day.weekday)
+        setHora(res.data.name)
+        setAssento(res.data.seats)
+        console.log(res.data)
+    })
+    
+    promise.catch((err) => {
+        console.log(err.response.data)
+        setError(true)
+    })
+
+    if (error === true) {
+		return <div>Erro na requisição! Tente de novo</div>
+	  }
+	  if (!error && Cadeiraserver === undefined) {
+		return <img alt='carregando' src='https://skyciv.com/wp-content/uploads/2020/10/Spinner.gif'/>
+	  }
+
+  },[])
 
     return(
         <>
         <Header></Header>
         <Titulo>Selecione o(s) assento(s)</Titulo>
         <AssentosLista>
-         {filmeteste.seats.map((p) => <Cadeira cadeiras={p} reservados={AssentosReservados} setReservados={setReservado} setReserva={props.setReserva}/>)}   
+         {Assento.map((p) => <Cadeira assento={Assento} cadeiras={p} reservados={AssentosReservados} setReservados={setReservado} setReserva={props.setReserva}/>)}   
         </AssentosLista>
         <Legenda>
             <Selecionado/>
@@ -40,9 +80,9 @@ export default function Tela3(props){
 
         <Footer>
         <Imagem>
-            <img src="https://external-preview.redd.it/ObVX0Y57PNuWshGNDSCFvJMKyNjsDPbII2erz8WEO0U.jpg?auto=webp&s=d692a86c84d80c5e7149a63947cf8e9fa78ac075"/>
+            <img src={imagem}/>
             </Imagem>
-            <p>BATMAN<br/>Quinta Feira - 16:30</p>
+            <p>{titulo}<br/>{Dia} - {Hora}</p>
             
         </Footer>
         </>

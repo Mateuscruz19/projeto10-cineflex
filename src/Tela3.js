@@ -29,18 +29,26 @@ export default function Tela3(props){
 
     function Reservar(event){
         event.preventDefault();
-        navigate("/sucesso")
         props.s(titulo)
         props.d(Dia)
         props.h(Hora)
         props.n(Nome)
         props.c(CPF)
         
-        props.setFinal({
+        const obj = {
             ids: props.AssentosReservados, name:Nome, cpf: CPF
-        })
+        }
+
+        props.setFinal(obj)
 
         console.log(props.res)
+
+        if(props.AssentosReservados.length>0){
+            const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many",obj)
+            promise.then((res) => navigate("/sucesso"))
+            promise.catch((err) => console.log(err.response))
+        }
+        
     }
     
   useEffect(() => {
@@ -78,29 +86,29 @@ export default function Tela3(props){
         <Header></Header>
         <Titulo>Selecione o(s) assento(s)</Titulo>
         <AssentosLista>
-         {Assento.map((p) => <Cadeira nc={props.nc} ncs={props.ncs} assento={Assento} cadeiras={p} reservados={props.AssentosReservados} setReservados={props.setReservado} setReserva={props.setReserva}/>)}   
+         {Assento.map((p) => <Cadeira data-identifier="seat" nc={props.nc} ncs={props.ncs} assento={Assento} cadeiras={p} reservados={props.AssentosReservados} setReservados={props.setReservado} setReserva={props.setReserva}/>)}   
         </AssentosLista>
         <Legenda>
-            <Selecionado/>
-            <Disponivel/>
-            <Indisponivel/>
+            <Selecionado data-identifier="seat-selected-subtitle"/>
+            <Disponivel data-identifier="seat-available-subtitle"/>
+            <Indisponivel data-identifier="seat-unavailable-subtitle"/>
             <p>Selecionado</p>
             <p>Disponivel</p>
             <p>Indisponivel</p>
         </Legenda>
         <Dados>
             <p>Nome do comprador:</p>
-            <input placeholder='Digite seu nome...' onChange={(n) => setNome(n.target.value)}></input>
+            <input data-identifier="buyer-name-input" placeholder='Digite seu nome...' onChange={(n) => setNome(n.target.value)}></input>
             <p>CPF do comprador:</p>
-            <input placeholder='Digite seu CPF' onChange={(c) => setCPF(c.target.value)}></input>
+            <input data-identifier="buyer-cpf-input" placeholder='Digite seu CPF' onChange={(c) => setCPF(c.target.value)}></input>
         </Dados>
-        <Finalizar onClick={Reservar}>Reservar assento(s)</Finalizar>
+        <Finalizar data-identifier="reservation-btn" onClick={Reservar}>Reservar assento(s)</Finalizar>
 
         <Footer>
-        <Imagem>
-            <img src={imagem}/>
+        <Imagem data-identifier="movie-img-preview">
+            <img  src={imagem}/>
             </Imagem>
-            <p>{titulo}<br/>{Dia} - {Hora}</p>
+            <p data-identifier="movie-and-session-infos-preview">{titulo}<br/>{Dia} - {Hora}</p>
             
         </Footer>
         </>

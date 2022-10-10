@@ -40,7 +40,7 @@ export default function Tela2(props){
         <Titulo>Selecione o horário</Titulo>
         <Horarios filme={filme}/>
         <Footer>
-        <Imagem>
+        <Imagem data-identifier="movie-img-preview"> 
             <img src={imagem}/>
             </Imagem>
             <p>{titulo}</p>

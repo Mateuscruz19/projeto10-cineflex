@@ -40,7 +40,7 @@ export default function Filmes() {
 		<>
 		{items.map(t => 
 			<Link to={`/sessoes/${t.id}`}>
-			<Filme><img alt='teste' src={t.posterURL}/></Filme>
+			<Filme data-identifier="movie-outdoor"><img alt='teste' src={t.posterURL}/></Filme>
 			</Link>
 			)}
 		</>	
@@ -60,6 +60,10 @@ align-items:center;
 img{
 	width: 129px;
 	height: 193px;
+}
+
+img:hover{
+	border:blue;
 }
 `
 

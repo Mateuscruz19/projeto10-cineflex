@@ -35,7 +35,7 @@ export default function Horarios(props){
     return(
         <>
         <HorariosFilmes>
-           {dias.map((d,index) =>  <Horario setSessoes={setSessoes} sessoes={horarioSessoes} dias={d} filme={props.filme}>
+           {dias.map((d,index) =>  <Horario  setSessoes={setSessoes} sessoes={horarioSessoes} dias={d} filme={props.filme}>
                 </Horario>)}
         </HorariosFilmes>
         </>

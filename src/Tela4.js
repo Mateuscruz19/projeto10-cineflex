@@ -20,23 +20,23 @@ export default function Tela3(props){
         <Header></Header>
         <Titulo>Pedido feito com sucesso!</Titulo>
         <ContainerDados>
-        <Resultado>
+        <Resultado data-identifier="movie-session-infos-reserve-finished">
             <DadosComprador>Filme e sessão</DadosComprador>
             <p>{props.s} <br/> {props.d}- {props.h}</p>
         </Resultado>
-        <Resultado>
+        <Resultado data-identifier="seat-infos-reserve-finished">
             <DadosComprador>Ingressos</DadosComprador>
            {props.ncs.map((a) => <p>Assento {a}</p>)}     
             
         </Resultado>
-        <Resultado>
+        <Resultado data-identifier="buyer-infos-reserve-finished">
             <DadosComprador>Comprador</DadosComprador>
             <p>Nome:{props.n}</p>
             <p>CPF:{props.c}</p>
         </Resultado>
         </ContainerDados>
         <Link to={`/`}>
-            <Home>Voltar pra Home</Home>
+            <Home data-identifier="back-to-home-btn">Voltar pra Home</Home>
             </Link>
         
         </>

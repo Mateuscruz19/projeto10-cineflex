@@ -13,9 +13,9 @@ export default function Horario(props){
 
     return(
        <Sessoes>
-            <p>{props.dias.weekday} - {props.dias.date}</p>
+            <p data-identifier="session-date">{props.dias.weekday} - {props.dias.date}</p>
             <ul>
-                {props.dias.showtimes.map( (s) => <Link to={`/assentos/${s.id}`}><Botao horario={s.name}></Botao></Link>)}
+                {props.dias.showtimes.map( (s) => <Link to={`/assentos/${s.id}`}><Botao data-identifier="hour-minute-btn" horario={s.name}></Botao></Link>)}
                
             </ul>
         </Sessoes>

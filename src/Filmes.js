@@ -39,7 +39,7 @@ export default function Filmes() {
 	return (
 		<>
 		{items.map(t => 
-			<Link to={`/tela2/${t.id}`}>
+			<Link to={`/sessoes/${t.id}`}>
 			<Filme><img alt='teste' src={t.posterURL}/></Filme>
 			</Link>
 			)}

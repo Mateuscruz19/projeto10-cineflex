@@ -10,14 +10,21 @@ export default function Cadeira(props){
 
     const [Clicou, setClicou] = useState(false)
 
+    
     function AdcionarAssento(){
-        console.log("Voceclicou")
-        props.setReservados([...props.reservados,props.cadeiras.id])
-        console.log(props.reservados)
         if(Clicou === false){
             setClicou(true)
+            props.setReservados([...props.reservados,props.cadeiras.id])
+            props.nc([...props.ncs,props.cadeiras.name])
+            console.log(props.reservados)
+           console.log(props.ncs)
         }else if(Clicou === true){
             setClicou(false)
+            let posicaoAssento = props.reservados.indexOf(props.cadeiras.id)
+            props.setReservados(props.reservados.splice(posicaoAssento,posicaoAssento+1))
+            props.nc(props.ncs.splice(posicaoAssento,posicaoAssento+1))
+            console.log(props.reservados)
+            console.log(props.ncs)
         }
     }
 
@@ -27,7 +34,7 @@ export default function Cadeira(props){
 
     return(
     <>
-    <Assento cor={Clicou ? "#1AAE9E" : props.cadeiras.isAvailable ? "#C3CFD9" : "#FBE192"} ocupado={props.cadeiras.isAvailable} onClick={props.cadeiras.isAvailable ? AdcionarAssento : AssentoOcupado}>{props.cadeiras.id}</Assento>
+    <Assento cor={Clicou ? "#1AAE9E" : props.cadeiras.isAvailable ? "#C3CFD9" : "#FBE192"} ocupado={props.cadeiras.isAvailable} onClick={props.cadeiras.isAvailable ? AdcionarAssento : AssentoOcupado}>{props.cadeiras.name}</Assento>
     </>
     )
 }

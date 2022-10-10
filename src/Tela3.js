@@ -8,6 +8,7 @@ import axios from 'axios';
 import Horarios from './Horarios';
 import Cadeira from './Cadeira';
 import filmeteste from './filmeteste';
+import { useNavigate } from 'react-router-dom';
 
 export default function Tela3(props){
 
@@ -17,14 +18,30 @@ export default function Tela3(props){
     const [imagem, setImagem] = useState("")
     const [Dia, setDia] = useState("")
     const [Hora, setHora] = useState("")
-
-    const [AssentosReservados, setReservado] = useState([])
+    
     const [Nome, setNome] = useState("");
     const [CPF, setCPF] = useState("");
     const [error, setError] = useState(false) 
 
     const { sessaoId } = useParams();
    
+    let navigate = useNavigate();
+
+    function Reservar(event){
+        event.preventDefault();
+        navigate("/sucesso")
+        props.s(titulo)
+        props.d(Dia)
+        props.h(Hora)
+        props.n(Nome)
+        props.c(CPF)
+        
+        props.setFinal({
+            ids: props.AssentosReservados, name:Nome, cpf: CPF
+        })
+
+        console.log(props.res)
+    }
     
   useEffect(() => {
 
@@ -55,12 +72,13 @@ export default function Tela3(props){
 
   },[])
 
+
     return(
         <>
         <Header></Header>
         <Titulo>Selecione o(s) assento(s)</Titulo>
         <AssentosLista>
-         {Assento.map((p) => <Cadeira assento={Assento} cadeiras={p} reservados={AssentosReservados} setReservados={setReservado} setReserva={props.setReserva}/>)}   
+         {Assento.map((p) => <Cadeira nc={props.nc} ncs={props.ncs} assento={Assento} cadeiras={p} reservados={props.AssentosReservados} setReservados={props.setReservado} setReserva={props.setReserva}/>)}   
         </AssentosLista>
         <Legenda>
             <Selecionado/>
@@ -72,11 +90,11 @@ export default function Tela3(props){
         </Legenda>
         <Dados>
             <p>Nome do comprador:</p>
-            <input placeholder='Digite seu nome...'></input>
+            <input placeholder='Digite seu nome...' onChange={(n) => setNome(n.target.value)}></input>
             <p>CPF do comprador:</p>
-            <input placeholder='Digite seu CPF'></input>
+            <input placeholder='Digite seu CPF' onChange={(c) => setCPF(c.target.value)}></input>
         </Dados>
-        <Finalizar>Reservar assento(s)</Finalizar>
+        <Finalizar onClick={Reservar}>Reservar assento(s)</Finalizar>
 
         <Footer>
         <Imagem>
